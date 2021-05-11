@@ -15,13 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+
+
     private Context context;
     private ArrayList<Model> Models;
 
-    public Adapter(Context context) {
+    public Adapter(ArrayList<Model> listData, Context context) {
         this.context = context;
     }
 
@@ -44,24 +45,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Glide.with(context).load(getModels().get(i).getLambangTeam()).into(viewHolder.ivLambangMerk);
         viewHolder.tvNamaMerk.setText(getModels().get(i).getNamaTeam());
-        viewHolder.share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_TEXT, getModels().get(i).getPrivew());
-                intent.setType("text/plain");
-                context.startActivity(Intent.createChooser(intent, "Send To"));
-            }
-        });
-
         viewHolder.visit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailActivity.class);
-
                 intent.putExtra("logo", getModels().get(i).getLambangTeam());
                 intent.putExtra("nama", getModels().get(i).getNamaTeam());
-                intent.putExtra("preview", getModels().get(i).getPrivew());
+                intent.putExtra("preview", getModels().get(i).getPreview());
                 context.startActivity(intent);
             }
         });
@@ -82,8 +72,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             super(itemView);
             ivLambangMerk = itemView.findViewById(R.id.IV);
             tvNamaMerk = itemView.findViewById(R.id.nama_merk);
-            share = itemView.findViewById(R.id.btn_share);
-            visit = itemView.findViewById(R.id.btn_preview);
+            //share = itemView.findViewById(R.id.btn_share);
+            visit = itemView.findViewById(R.id.btn_Rincian);
         }
     }
 }

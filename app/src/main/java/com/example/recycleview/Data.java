@@ -23,14 +23,14 @@ public class Data {
     };
 
     public static ArrayList<Model> getListData(){
-        Model Model = null;
+        Model Model1 = null;
         ArrayList<Model> list = new ArrayList<>();
         for (int i = 0; i <title.length; i++){
-           Model = new Model();
-           Model.setLambangTeam(thumbnail[i]);
-           Model.setNamaTeam(title[i]);
-           Model.setPrivew(preview[i]);
-            list.add(Model);
+           Model1 = new Model();
+           Model1.setLambangTeam(thumbnail[i]);
+           Model1.setNamaTeam(title[i]);
+           Model1.setPreview(preview[i]);
+            list.add(Model1);
         }
         return list;
     }

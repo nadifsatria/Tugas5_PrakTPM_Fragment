@@ -1,33 +1,55 @@
 package com.example.recycleview;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.MenuItem;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
-    private RecyclerView rvTeam;
-    private ArrayList<Model> listTeam = new ArrayList<>();
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+
+    private BottomNavigationView navbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        rvTeam = findViewById(R.id.rv_company_list);
-        rvTeam.setHasFixedSize(true);
-        listTeam.addAll(Data.getListData());
+        navbar = findViewById(R.id.main_navbar);
+        navbar.setOnNavigationItemSelectedListener(this);
 
-        showRecyclerList();
+        loadFragment(new Fragment());
     }
 
-    private void showRecyclerList() {
-        rvTeam.setLayoutManager(new LinearLayoutManager(this));
-        Adapter footbalAdapter = new Adapter(this);
-        footbalAdapter.setModels(listTeam);
-        rvTeam.setAdapter(footbalAdapter);
+    private boolean loadFragment(Fragment fragment) {
+        if (fragment != null){
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fragment).commit();
+
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment fragment = null;
+
+        switch(item.getItemId()){
+            case R.id.ic_list:
+                fragment = new ListFragment();
+                break;
+
+            case R.id.ic_phone:
+                fragment = new CallFragment();
+                break;
+        }
+        return loadFragment(fragment);
     }
 }

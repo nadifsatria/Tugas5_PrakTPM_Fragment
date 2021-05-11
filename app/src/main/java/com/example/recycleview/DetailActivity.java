@@ -15,11 +15,11 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.preview_company);
+        setContentView(R.layout.activity_detail);
 
-        ivLogo = findViewById(R.id.iv_logo);
-        tvNamaPreview = findViewById(R.id.preview_nama_merk);
-        tvPreview = findViewById(R.id.tv_preview);
+        ivLogo = findViewById(R.id.IV);
+        tvNamaPreview = findViewById(R.id.nama_merk);
+        tvPreview = findViewById(R.id.det_preview);
 
         getIncomingExtra();
     }
